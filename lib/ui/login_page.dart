@@ -334,8 +334,9 @@ class _LoginPageState extends State<LoginPage>
                               fontFamily: "WorkSansBold"),
                         ),
                       ),
-                      onPressed: () =>
-                          showInSnackBar("Login button pressed")),
+                      onPressed: (){
+                  bloc.inLoginButton.add(context);
+                  }),
                 ),
               ],
             ),
@@ -424,7 +425,7 @@ class _LoginPageState extends State<LoginPage>
                   padding: EdgeInsets.only(top: 10.0),
                   child: GestureDetector(
                     onTap: (){
-                        bloc.login.add(context);
+                        bloc.inGoogleLogin.add(context);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(15.0),

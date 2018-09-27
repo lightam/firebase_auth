@@ -15,35 +15,43 @@ class LoginPageBloc implements BlocBase {
   }
 
   //
-  // Stream to handle the counter
+  // Stream to handle the loginButton
   //
-  StreamController<int> _counterController = StreamController<int>();
-  Stream<int> get outCounter => _counterController.stream;
+  StreamController _normalLoginController = StreamController();
+  StreamSink get inLoginButton => _normalLoginController.sink;
 
   //
-  // Stream to handle the action on the counter
+  // Stream to handle the GoogleLogin
   //
-  StreamController _loginButtonController = StreamController();
-  StreamSink get login => _loginButtonController.sink;
+  StreamController _googleLoginButtonController = StreamController();
+  StreamSink get inGoogleLogin => _googleLoginButtonController.sink;
 
   //
   // Constructor
   //
   LoginPageBloc(){
     fillUser(user);
-    _loginButtonController.stream
-        .listen(_loginAction);
+    _googleLoginButtonController.stream
+        .listen(_googleLoginAction);
+    _normalLoginController.stream
+        .listen(_normalLoginAction);
   }
 
   void dispose(){
-    _loginButtonController.close();
-    _counterController.close();
+    _googleLoginButtonController.close();
+    _normalLoginController.close();
   }
 
-  void _loginAction(data){
+  void _normalLoginAction(data){
+    print("Normal Login");
+    Navigator.pushNamed(data, "/HomePage");
+  }
+
+  void _googleLoginAction(context){
+
     userAuth.verifyUser(user).then((onValue) {
       if (onValue == "Login Successfull")
-        Navigator.pushNamed(data, "/HomePage");
+        Navigator.pushNamed(context, "/HomePage");
       else
         print("Login not working: $onValue");
     });
