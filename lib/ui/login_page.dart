@@ -141,6 +141,7 @@ class _LoginPageState extends State<LoginPage>
     _pageController = PageController();
   }
 
+  //Zeigt die Information am unteren Bildschirmrand an
   void showInSnackBar(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
     _scaffoldKey.currentState?.removeCurrentSnackBar();
